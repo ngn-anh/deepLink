@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Đang mở ứng dụng...</title>
+    <script>
+      function getProductIdFromQuery() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('productId');
+      }
+
+      const productId = getProductIdFromQuery();
+      if (productId) {
+        window.location.href = `myapp://product/${productId}`;
+      } else {
+        document.body.innerText = 'Không tìm thấy productId';
+      }
+    </script>
+  </head>
+  <body>
+    <p>Nếu không được chuyển hướng, hãy mở ứng dụng thủ công.</p>
+  </body>
+</html>
