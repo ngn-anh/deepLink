@@ -1,23 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <title>Đang mở ứng dụng...</title>
-    <script>
-      function getProductIdFromQuery() {
-        const params = new URLSearchParams(window.location.search);
-        return params.get('productId');
-      }
-
-      const productId = getProductIdFromQuery();
-      if (productId) {
-        window.location.href = `myapp://product/${productId}`;
-      } else {
-        document.body.innerText = 'Không tìm thấy productId';
-      }
-    </script>
+    <style>
+      body { font-family: sans-serif; text-align: center; padding-top: 60px; }
+      a { color: #f50057; font-size: 18px; }
+    </style>
   </head>
   <body>
-    <p>Nếu không được chuyển hướng, hãy mở ứng dụng thủ công.</p>
+    <p>Nếu không được chuyển hướng tự động, hãy nhấn nút bên dưới:</p>
+    <a id="openApp" href="#">Mở ứng dụng ngay</a>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      const deeplink = `myapp://product/${id}`;
+      const btn = document.getElementById("openApp");
+      if (id) {
+        btn.href = deeplink;
+        // Thử redirect sau 1s, nếu được
+        setTimeout(() => window.location.href = deeplink, 1000);
+      } else {
+        document.body.innerHTML = "<p>Không tìm thấy ID sản phẩm.</p>";
+      }
+    </script>
   </body>
 </html>
